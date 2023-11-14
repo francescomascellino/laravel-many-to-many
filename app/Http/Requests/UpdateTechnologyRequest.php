@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateTechnologyRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateTechnologyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::id() === 1; // SOLO USER ID 1 PPUO' AGGIORNARE
     }
 
     /**

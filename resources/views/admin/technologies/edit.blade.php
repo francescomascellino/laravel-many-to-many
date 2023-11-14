@@ -4,10 +4,10 @@
     <div class="container">
 
         <h2 class="fs-4 text-secondary my-4">
-            {{ __('Type Edit Page for') }} {{ Auth::user()->name }}.
+            {{ __('Technology Edit Page for') }} {{ Auth::user()->name }}.
         </h2>
         <h3 class="fs-5 text-secondary">
-            {{ __('Editing Type') }} ID: {{ $type->id }}
+            {{ __('Editing Technology') }} ID: {{ $technology->id }}
         </h3>
 
         <div class="row justify-content-center my-3">
@@ -15,7 +15,8 @@
 
                 @include('admin.projects.partials.error_alert')
 
-                <form action="{{ route('admin.types.update', $type) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.technologies.update', $technology) }}" method="POST"
+                    enctype="multipart/form-data">
 
                     @csrf
 
@@ -26,7 +27,7 @@
                         <label for="name" class="form-label"><strong>Name</strong></label>
 
                         <input type="text" class="form-control" name="name" id="name" aria-describedby="helpName"
-                            value="{{ old('name') ? old('name') : $type->name }}">
+                            value="{{ old('name') ? old('name') : $technology->name }}">
 
                         <div id="HelpName" class="form-text">
                             Your Type name must be 3-50 characters long.
