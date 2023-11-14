@@ -21,6 +21,7 @@
 
                     @method('PUT')
 
+                    {{-- TITLE FORM --}}
                     <div class="mb-3">
 
                         <label for="title" class="form-label"><strong>Title</strong></label>
@@ -34,6 +35,7 @@
 
                     </div>
 
+                    {{-- DESCRIPTION FORM --}}
                     <div class="mb-3">
 
                         <label for="description" class="form-label"><strong>Description</strong></label>
@@ -47,6 +49,7 @@
 
                     </div>
 
+                    {{-- TYPE FORM --}}
                     <div class="mb-3">
                         <label for="type_id" class="form-label">Type</label>
                         <select class="form-select form-select @error('type_id') is-invalid @enderror" name="type_id"
@@ -66,7 +69,7 @@
                         @enderror
                     </div>
 
-{{--                     <div class="mb-3">
+                    {{--                     <div class="mb-3">
 
                         <label for="tech" class="form-label"><strong>Technologies Used</strong></label>
 
@@ -79,6 +82,7 @@
 
                     </div> --}}
 
+                    {{-- TECHNOLOGIES FORM --}}
                     <div class="mb-3">
                         <label for="technologies" class="form-label"><strong>Technologies Used</strong></label>
                         <select multiple class="form-select form-select" name="technologies[]" id="technologies">
@@ -102,6 +106,7 @@
                         @enderror
                     </div>
 
+                    {{-- GITHUB LINK FORM --}}
                     <div class="mb-3">
 
                         <label for="github" class="form-label"><strong>GitHub Link</strong></label>
@@ -115,6 +120,7 @@
 
                     </div>
 
+                    {{-- WENSITE LINK FORM --}}
                     <div class="mb-3">
 
                         <label for="link" class="form-label"><strong>Project Link</strong></label>
@@ -128,6 +134,7 @@
 
                     </div>
 
+                    {{-- THUMB FORM --}}
                     <div class="mb-3">
 
                         <div class="mb-3">

@@ -29,7 +29,8 @@
 
                     <div class="card-body">
                         <p><strong>Description: </strong>{{ $project->description }}</p>
-                        <p><strong>Type: </strong>{{ isset($project->type->name) ? $project->type->name : 'Uncategorized' }}</p>
+                        <p><strong>Type: </strong>{{ isset($project->type->name) ? $project->type->name : 'Uncategorized' }}
+                        </p>
 
                         <p><strong>Technologies used:</strong></p>
 
@@ -45,8 +46,12 @@
                             </ul>
                         </div>
 
-                        <p><i class="fa-brands fa-github"></i> {{ $project->github }}</p>
-                        <p><i class="fa-solid fa-link"></i> {{ $project->link }}</p>
+                        <p><i class="fa-brands fa-github"></i> <a href="{{ $project->github }}"
+                                class="text-decoration-none text-black" target="blank">{{ $project->github }}</a>
+                        </p>
+
+                        <p><i class="fa-solid fa-link"></i> <a href="{{ $project->link }}"
+                                class="text-decoration-none text-black" target="blank">{{ $project->link }}</a></p>
                     </div>
                 </div>
             </div>

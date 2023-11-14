@@ -30,8 +30,8 @@ class StoreProjectRequest extends FormRequest
             'description' => 'nullable|bail|min:3|max:500',
             // 'tech' => 'nullable|bail|min:3|max:200',
             'technologies' => 'nullable|exists:technologies,id', // PUO' NON ESSERE SELEZIONATO E DEVE ESISTERE NELLA COLONNA DEGLI ID
-            'github' => 'nullable|bail|min:3|max:2048',
-            'link' => 'nullable|bail|min:3|max:2048',
+            'github' => 'nullable|bail|min:3|max:2048|url:http,https',
+            'link' => 'nullable|bail|min:3|max:2048|url:http,https',
         ];
     }
 }

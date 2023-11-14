@@ -16,6 +16,7 @@
 
                     @csrf
 
+                    {{-- TITLE FORM --}}
                     <div class="mb-3">
 
                         <label for="title" class="form-label"><strong>* Title</strong></label>
@@ -33,12 +34,13 @@
 
                     </div>
 
+                    {{-- DESCRIPTION FORM --}}
                     <div class="mb-3">
 
                         <label for="description" class="form-label "><strong>Description</strong></label>
 
                         <textarea class="form-control @error('description') is-invalid  @enderror" name="description" id="description"
-                            aria-describedby="helpDescription" cols="30" rows="5" placeholder="New Project Description"></textarea>
+                            aria-describedby="helpDescription" cols="30" rows="5" placeholder="New Project Description">{{ old('descritpion') }}</textarea>
 
                         <div id="helpDescription" class="form-text">
                             Your description must be 3-500 characters long.
@@ -50,6 +52,7 @@
 
                     </div>
 
+                    {{-- TYPE FORM --}}
                     <div class="mb-3">
                         <label for="type_id" class="form-label">Type</label>
                         <select class="form-select form-select @error('type_id') is-invalid @enderror" name="type_id"
@@ -69,7 +72,7 @@
                         @enderror
                     </div>
 
-{{--                     <div class="mb-3">
+                    {{--                     <div class="mb-3">
 
                         <label for="tech" class="form-label"><strong>Technologies Used</strong></label>
 
@@ -86,6 +89,7 @@
 
                     </div> --}}
 
+                    {{-- TECHNOLOGIES FORM --}}
                     <div class="mb-3">
                         <label for="technologies" class="form-label"><strong>Technologies Used</strong></label>
 
@@ -95,8 +99,7 @@
                             <option disabled>Select Technologies used</option>
 
                             @foreach ($technologies as $technology)
-                                <option value="{{ $technology->id }}"
-                                    {{-- CONFRONTA L'ARRAY DEGLI ID DELLE TECHNOLOGIES CON QUELLO CONTENENTE I CAMPI SELEZIONATI PRECEDENTEMENTE
+                                <option value="{{ $technology->id }}" {{-- CONFRONTA L'ARRAY DEGLI ID DELLE TECHNOLOGIES CON QUELLO CONTENENTE I CAMPI SELEZIONATI PRECEDENTEMENTE
                                     SE VI SONO CORRISPONDENZE LI PRESELEZIONA
                                     SE L'ARRAY OLD NON ESISTE CONFRONTA UN ARRAY VUOTO [] COME FALLBACK, AUTOMATICAMENTE NON TROVANDO CORRISPONDENZE E NON SELEZIONANDO NULLA --}}
                                     {{ in_array($technology->id, old('technologies', [])) ? 'selected' : '' }}>
@@ -111,6 +114,7 @@
 
                     </div>
 
+                    {{-- GITHUB LINK FORM --}}
                     <div class="mb-3">
 
                         <label for="github" class="form-label"><strong>GitHub Link</strong></label>
@@ -125,6 +129,7 @@
 
                     </div>
 
+                    {{-- WEBSITE LINK FORM --}}
                     <div class="mb-3">
 
                         <label for="link" class="form-label"><strong>Project Link</strong></label>
@@ -138,6 +143,7 @@
 
                     </div>
 
+                    {{-- THUMB FORM --}}
                     <div class="mb-3">
 
                         <label for="thumb" class="form-label"><strong>Choose a Thumbnail image file</strong></label>

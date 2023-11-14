@@ -1,3 +1,15 @@
+@php
+    use App\Models\Project;
+    $trashed = Project::onlyTrashed()->count();
+    $projects_count = Project::count();
+
+    use App\Models\Type;
+    $types_count = Type::count();
+
+    use App\Models\Technology;
+    $technologies_count = Technology::count();
+@endphp
+
 <nav id="sidebarMenu" class="col col-md-3 col-lg-2  bg-dark navbar-dark collapse sidebar d-md-block">
 
     <div class="position-sticky pt-3">
@@ -42,21 +54,23 @@
                 <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.projects.index' ? 'bg-secondary' : '' }}"
                     href="{{ route('admin.projects.index') }}">
                     <i class="fa-solid fa-diagram-project fa-lg fa-fw"></i> {{ __('Projects') }}
+                    {{ $projects_count ? '(' . $projects_count . ')' : '' }}
                 </a>
 
                 <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.types.index' ? 'bg-secondary' : '' }}"
                     href="{{ route('admin.types.index') }}">
-                    <i class="fa-solid fa-tag fa-lg fa-fw"></i> {{ __('Project Types') }}
+                    <i class="fa-solid fa-tag fa-lg fa-fw"></i> {{ __('Project Types') }} {{ $types_count ? '(' . $types_count . ')' : '' }}
                 </a>
 
                 <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.technologies.index' ? 'bg-secondary' : '' }}"
                     href="{{ route('admin.technologies.index') }}">
-                    <i class="fa-solid fa-code fa-lg fa-fw"></i> {{ __('Projects Technologies') }}
+                    <i class="fa-solid fa-code fa-lg fa-fw"></i> {{ __('Projects Technologies') }} {{ $technologies_count ? '(' . $technologies_count  . ')' : '' }}
                 </a>
 
                 <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.projects.recycle' ? 'bg-secondary' : '' }}"
                     href="{{ route('admin.projects.recycle') }}">
                     <i class="fa-regular fa-trash-can fa-lg fa-fw"></i> {{ __('Recycle Bin') }}
+                    {{ $trashed ? '(' . $trashed . ')' : '' }}
                 </a>
 
             </li>
