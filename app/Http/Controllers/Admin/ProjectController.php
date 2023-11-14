@@ -83,7 +83,8 @@ class ProjectController extends Controller
         $page_title = 'Edit';
 
         $types = Type::all();
-        return view('admin.projects.edit', compact('project', 'page_title', 'types'));
+        $technologies = Technology::all();
+        return view('admin.projects.edit', compact('project', 'page_title', 'types', 'technologies'));
     }
 
     /**
@@ -112,6 +113,10 @@ class ProjectController extends Controller
 
             // ASSEGNA AL VALORE DI $valData IL PERCORSO DELL'IMMAGINE NELLO STORAGE
             $valData['thumb'] = $path;
+        }
+
+        if ($request->has('technologies')) {
+            $project->technologies()->sync($request->technologies); // (o valData['technologies'])
         }
 
         // AGGIORNA L'ENTITA' CON I VALORI DI $valData

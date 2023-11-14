@@ -189,8 +189,9 @@ AGGIUNGERE IL CAPO DI SELEZIONE DELLE TECHNOLOGIES NELLA VUSTA ***admin.projects
 
             @foreach ($technologies as $technology)
                 <option value="{{ $technology->id }}"
-                    // SE TROVA technology id NELL'ARRAY old ASSEGNA SELECTED. 
-                    // SE L'ARRAY E' VUOTO EFFETTUA IL CHECK SU [] CHE ESSENDO VUOTO NON DA SELEZIONI
+                    // CONFRONTA L'ARRAY DEGLI ID DELLE TECHNOLOGIES CON QUELLO CONTENENTE I CAMPI SELEZIONATI PRECEDENTEMENTE
+                    // SE VI SONO CORRISPONDENZE LI PRESELEZIONA
+                    // SE L'ARRAY OLD NON ESISTE CONFRONTA UN ARRAY VUOTO [] COME FALLBACK, AUTOMATICAMENTE NON TROVANDO CORRISPONDENZE E NON SELEZIONANDO NULLA 
                     {{ in_array($technology->id, old('technologies', [])) ? 'selected' : '' }}>
 
                 {{ $technology->name }} ID: {{ $technology->id }}</option>
@@ -231,3 +232,53 @@ VISUALIZZARE LE TECH USATE NEL MARKUP
 </ul>
 ```
 
+AGGIORNARE IL METODO ***edit()*** NEL ***ProjectController***
+```php
+public function edit(Project $project)
+    {
+        $page_title = 'Edit';
+
+        $types = Type::all();
+        $technologies = Technology::all();
+        return view('admin.projects.edit', compact('project', 'page_title', 'types', 'technologies'));
+    }
+```
+
+MODIFICARE LA VISTA ***admin.projects.create*** E AGGIUNGERE IL FORM PER SELEZIONARE LE TECHNOLOGIES
+
+```php
+<label for="technologies" class="form-label"><strong>Technologies Used</strong></label>
+    <select multiple class="form-select form-select" name="technologies[]" id="technologies">
+        <option disabled>Select Technologies used</option>
+            @foreach ($technologies as $technology)
+                @if ($errors->any())
+
+                    // SE VI SONO ERRORI CONTROLLA SE L'ID DELLA TECHNOLOGY CICLATA E' CONTENUTO DENTRO old('technologies')
+                    // SE VI SONO CORRISPONDEZE LE PRESELEZIONA
+                    // SE L'ARRAY OLD NON ESISTE CONFRONTA UN ARRAY VUOTO [] COME FALLBACK, AUTOMATICAMENTE NON TROVANDO CORRISPONDENZE E NON SELEZIONANDO NULLA
+                    <option value="{{ $technology->id }}"
+                    {{ in_array($technology->id, old('technologies', [])) ? 'selected' : '' }}>
+                        {{ $technology->name }}
+                    </option>
+
+                @else
+
+                    // SE $project->technologies CONTIENE LA TECHNOLOGY CICLATA LA SELEZIONA
+                    <option value="{{ $technology->id }}"
+                    {{ $project->technologies->contains($technology) ? 'selected' : '' }}>
+                        {{ $technology->name }}</option>
+                @endif
+            @endforeach
+    </select>
+
+@error('technologies')
+    <div class="text-danger">{{ $message }}</div>
+@enderror
+```
+
+MODIFICARE IL METODO ***update()*** in ***ProjectController*** E AGGIUNGERE UN COLTROLLO SULLA PRESENZA DI ***technologies*** nella ***UpdateProjectRequest***
+```php
+if ($request->has('technologies')) {
+    $project->technologies()->sync($request->technologies); // (o valData['technologies'])
+}
+```

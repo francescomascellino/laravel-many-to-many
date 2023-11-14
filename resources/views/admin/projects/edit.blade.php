@@ -41,11 +41,6 @@
                         <textarea class="form-control" name="description" id="description" aria-describedby="helpDescription" cols="30"
                             rows="5">{{ old('description') ? old('description') : $project->description }}</textarea>
 
-                        {{-- OLD FORM --}}
-                        {{-- <input type="text" class="form-control" name="description" id="description"
-                            aria-describedby="helpTitle"
-                            value="{{ old('description') ? old('description') : $project->description }}"> --}}
-
                         @error('description')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -75,13 +70,36 @@
 
                         <label for="tech" class="form-label"><strong>Technologies Used</strong></label>
 
-                        <input type="text" class="form-control" name="tech" id="tech"
-                            aria-describedby="helpTech" value="{{ old('tech') ? old('tech') : $project->tech }}">
+                        <input type="text" class="form-control" name="tech" id="tech" aria-describedby="helpTech"
+                            value="{{ old('tech') ? old('tech') : $project->tech }}">
 
                         @error('tech')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
 
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="technologies" class="form-label"><strong>Technologies Used</strong></label>
+                        <select multiple class="form-select form-select" name="technologies[]" id="technologies">
+                            <option disabled>Select Technologies used</option>
+                            @foreach ($technologies as $technology)
+                                @if ($errors->any())
+                                    <option value="{{ $technology->id }}" {{-- SE VI SONO ERRORI CONTROLLA SE L'ID DELLA TECHNOLOGY CICLATA E' CONTENUTO DENTRO old('technologies')
+                                        SE VI SONO CORRISPONDENZE LE PRESELEZIONA
+                                        SE L'ARRAY OLD NON ESISTE CONFRONTA UN ARRAY VUOTO [] COME FALLBACK, AUTOMATICAMENTE NON TROVANDO CORRISPONDENZE E NON SELEZIONANDO NULLA --}}
+                                        {{ in_array($technology->id, old('technologies', [])) ? 'selected' : '' }}>
+                                        {{ $technology->name }}</option>
+                                @else
+                                    <option value="{{ $technology->id }}" {{-- SE $project->technologies CONTIENE LA TECHNOLOGY CICLATA LA SELEZIONA --}}
+                                        {{ $project->technologies->contains($technology) ? 'selected' : '' }}>
+                                        {{ $technology->name }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                        @error('technologies')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
@@ -101,8 +119,8 @@
 
                         <label for="link" class="form-label"><strong>Project Link</strong></label>
 
-                        <input type="text" class="form-control" name="link" id="link"
-                            aria-describedby="helpLink" value="{{ old('link') ? old('link') : $project->link }}">
+                        <input type="text" class="form-control" name="link" id="link" aria-describedby="helpLink"
+                            value="{{ old('link') ? old('link') : $project->link }}">
 
                         @error('link')
                             <div class="text-danger">{{ $message }}</div>

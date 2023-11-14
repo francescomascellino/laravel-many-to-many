@@ -96,6 +96,9 @@
 
                             @foreach ($technologies as $technology)
                                 <option value="{{ $technology->id }}"
+                                    {{-- CONFRONTA L'ARRAY DEGLI ID DELLE TECHNOLOGIES CON QUELLO CONTENENTE I CAMPI SELEZIONATI PRECEDENTEMENTE
+                                    SE VI SONO CORRISPONDENZE LI PRESELEZIONA
+                                    SE L'ARRAY OLD NON ESISTE CONFRONTA UN ARRAY VUOTO [] COME FALLBACK, AUTOMATICAMENTE NON TROVANDO CORRISPONDENZE E NON SELEZIONANDO NULLA --}}
                                     {{ in_array($technology->id, old('technologies', [])) ? 'selected' : '' }}>
                                     {{ $technology->name }} ID: {{ $technology->id }}</option>
                             @endforeach
