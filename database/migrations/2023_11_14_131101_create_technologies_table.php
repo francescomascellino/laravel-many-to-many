@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('technologies', function (Blueprint $table) {
             $table->id();
+
+            $table->string('name', 50)->unique;
+            $table->string('slug', 50);
+
             $table->timestamps();
         });
     }
