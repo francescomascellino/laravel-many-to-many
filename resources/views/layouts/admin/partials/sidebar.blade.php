@@ -46,9 +46,13 @@
 
                 <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.types.index' ? 'bg-secondary' : '' }}"
                     href="{{ route('admin.types.index') }}">
-                    <i class="fa-solid fa-tag fa-lg fa-fw"></i></i> {{ __('Project Types') }}
+                    <i class="fa-solid fa-tag fa-lg fa-fw"></i> {{ __('Project Types') }}
                 </a>
 
+                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.technologies.index' ? 'bg-secondary' : '' }}"
+                    href="{{ route('admin.technologies.index') }}">
+                    <i class="fa-solid fa-code fa-lg fa-fw"></i> {{ __('Projects Technologies') }}
+                </a>
 
                 <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.projects.recycle' ? 'bg-secondary' : '' }}"
                     href="{{ route('admin.projects.recycle') }}">

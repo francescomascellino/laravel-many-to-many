@@ -44,7 +44,6 @@ class TypeController extends Controller
         // INVOCHIAMO IL METODO STATICO DAL MODELLO
         $valData['slug'] = Type::generateSlug($request->name);
 
-
         $newType = Type::create($valData);
 
         return to_route('admin.types.index')->with('status', 'Well Done, New Type Added Succeffully');
