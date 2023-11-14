@@ -87,6 +87,28 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="technologies" class="form-label"><strong>Technologies Used</strong></label>
+
+                        {{-- VIENE DATO UN ARRAY COME NAME PER ACCETTARE SCELTE MULTIPLE --}}
+                        <select class="form-select" multiple name="technologies[]" id="technologies">
+
+                            <option disabled>Select Technologies used</option>
+
+                            @foreach ($technologies as $technology)
+                                <option value="{{ $technology->id }}"
+                                    {{ in_array($technology->id, old('technologies', [])) ? 'selected' : '' }}>
+                                    {{ $technology->name }} ID: {{ $technology->id }}</option>
+                            @endforeach
+
+                        </select>
+
+                        @error('technologies')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+
+                    </div>
+
+                    <div class="mb-3">
 
                         <label for="github" class="form-label"><strong>GitHub Link</strong></label>
 

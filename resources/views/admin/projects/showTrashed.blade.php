@@ -29,8 +29,22 @@
 
                     <div class="card-body">
                         <p><strong>Description: </strong>{{ $project->description }}</p>
-                        <p><strong>Type: </strong>{{$project->type->name ? $project->type->name : 'Uncategorized'}}</p>
-                        <p><strong>Technologies used: </strong>{{ $project->tech }}</p>
+                        <p><strong>Type: </strong>{{ $project->type->name ? $project->type->name : 'Uncategorized' }}</p>
+
+                        <p><strong>Technologies used:</strong></p>
+
+                        <div class="d-flex">
+                            <ul class="d-flex gap-2 list-unstyled">
+                                @forelse ($project->technologies as $technology)
+                                    <li class="badge bg-success">
+                                        <i class="fa-solid fa-code"></i> {{ $technology->name }}
+                                    </li>
+                                @empty
+                                    <li class="badge bg-secondary"><i class="fa-regular fa-file"></i> None/Others</li>
+                                @endforelse
+                            </ul>
+                        </div>
+
                         <p><i class="fa-brands fa-github"></i> {{ $project->github }}</p>
                         <p><i class="fa-solid fa-link"></i> {{ $project->link }}</p>
                     </div>
@@ -40,7 +54,7 @@
         </div>
 
         <a href="{{ route('admin.projects.recycle') }}" class="btn btn-primary my-3"><i
-                    class="fa-solid fa-arrow-rotate-left"></i> Back</a>
+                class="fa-solid fa-arrow-rotate-left"></i> Back</a>
 
         {{-- <h1>ADMIN/PROJECTS/SHOWTRASHED.BLADE</h1> --}}
     </div>

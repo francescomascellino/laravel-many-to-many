@@ -33,7 +33,21 @@
 
                                 <p><strong>Type:
                                     </strong>{{ $project->type->name ? $project->type->name : 'Uncategorized' }}</p>
+
                                 <p><strong>Technologies used: </strong>{{ $project->tech }}</p>
+
+                                <div class="d-flex">
+                                    <ul class="d-flex gap-2 list-unstyled">
+                                        @forelse ($project->technologies as $technology)
+                                            <li class="badge bg-success">
+                                                <i class="fa-solid fa-code"></i> {{ $technology->name }}
+                                            </li>
+                                        @empty
+                                            <li class="badge bg-secondary"><i class="fa-regular fa-file"></i> None/Others
+                                            </li>
+                                        @endforelse
+                                    </ul>
+                                </div>
 
                                 <p><i class="fa-brands fa-github"></i> <a href="{{ $project->github }}"
                                         class="text-decoration-none text-black" target="blank">{{ $project->github }}</a>

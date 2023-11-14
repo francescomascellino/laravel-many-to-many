@@ -164,3 +164,70 @@ ESEGUIRE LA MIGRATION
 ```bash
 php artisan migrate
 ```
+
+AGGIORNARE IL METODO ***create()*** NEL ***ProjectController***
+```php
+public function create()
+    {
+        $page_title = 'Add New';
+        $types = Type::all();
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact('page_title', 'types', 'technologies'));
+    }
+```
+
+AGGIUNGERE IL CAPO DI SELEZIONE DELLE TECHNOLOGIES NELLA VUSTA ***admin.projects.create***
+```php
+<div class="mb-3">
+
+    <label for="technologies" class="form-label"><strong>Technologies Used</strong></label>
+
+        // VIENE DATO UN ARRAY COME NAME PER ACCETTARE SCELTE MULTIPLE
+        <select class="form-select" multiple name="technologies[]" id="technologies">
+
+            <option disabled>Select Technologies used</option>
+
+            @foreach ($technologies as $technology)
+                <option value="{{ $technology->id }}"
+                    // SE TROVA technology id NELL'ARRAY old ASSEGNA SELECTED. 
+                    // SE L'ARRAY E' VUOTO EFFETTUA IL CHECK SU [] CHE ESSENDO VUOTO NON DA SELEZIONI
+                    {{ in_array($technology->id, old('technologies', [])) ? 'selected' : '' }}>
+
+                {{ $technology->name }} ID: {{ $technology->id }}</option>
+
+            @endforeach
+
+        </select>
+
+        @error('technologies')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
+
+</div>
+```
+
+EDITARE LA ***StoreProjectRequest*** AGGIUNGENDO LE REGOLE PER TECHNOLOGIES
+```php
+'technologies' => 'nullable|exists:technologies,id', // PUO' NON ESSERE SELEZIONATO E DEVE ESISTERE NELLA COLONNA DEGLI ID
+```
+
+AGGIUNGERE AL METODO ***store()*** IN ***ProjectController*** LE TECHNOLOGIES USANDO IL METODO ***attach()***
+https://laravel.com/docs/10.x/eloquent-relationships#attaching-detaching
+
+```php
+$newProject->technologies()->attach($request->technologies);
+```
+
+VISUALIZZARE LE TECH USATE NEL MARKUP
+```php
+<ul class="d-flex gap-2 list-unstyled">
+    @forelse ($project->technologies as $technology)
+        <li class="badge bg-success">
+            <i class="fa-solid fa-code"></i> {{ $technology->name }}
+        </li>
+    @empty
+        <li class="badge bg-secondary"><i class="fa-regular fa-file"></i> None/Others</li>
+    @endforelse
+</ul>
+```
+

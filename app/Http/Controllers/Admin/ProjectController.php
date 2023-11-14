@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Storage;
@@ -37,7 +38,8 @@ class ProjectController extends Controller
     {
         $page_title = 'Add New';
         $types = Type::all();
-        return view('admin.projects.create', compact('page_title', 'types'));
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact('page_title', 'types', 'technologies'));
     }
 
     /**
@@ -58,6 +60,8 @@ class ProjectController extends Controller
         }
 
         $newProject = Project::create($valData);
+
+        $newProject->technologies()->attach($request->technologies);
 
         return to_route('admin.projects.index')->with('status', 'Well Done, New Entry Added Succeffully');
     }
