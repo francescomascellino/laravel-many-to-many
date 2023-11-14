@@ -80,9 +80,14 @@ class TechnologyController extends Controller
      */
     public function destroy(Technology $technology)
     {
-        // $projects = Project::where('technology_id', $technology->id)->get();
-        // dd($projects);
-        // $projects->detach($technology);
+        $projects = Project::all();
+
+        foreach ($projects as $project) {
+            if ($project->technologies) {
+                $project->technologies()->detach($technology->id);
+            }
+        }
+
         $technology->delete();
         return to_route('admin.technologies.index')->with('status', 'Well Done, Element deleted Succeffully'); 
     }

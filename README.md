@@ -332,3 +332,20 @@ AGGIUNGERE LE ROUTES IN ***web.php*** ALL'INTERNO DEL ROUTES GROUP DELL'ADMIN
 ```
 
 INSERIRE LE CRUDS E LE VISTE NECESSARIE
+
+destroy() DELLE TECHNOLOGIES GIA' ASSOCIATE A UN PROJECT
+```php
+public function destroy(Technology $technology)
+    {
+        $projects = Project::all();
+
+        foreach ($projects as $project) {
+            if ($project->technologies) {
+                $project->technologies()->detach($technology->id);
+            }
+        }
+
+        $technology->delete();
+        return to_route('admin.technologies.index')->with('status', 'Well Done, Element deleted Succeffully'); 
+    }
+```
