@@ -290,3 +290,28 @@ https://laravel.com/docs/10.x/eloquent-relationships#attaching-detaching
 ```php
 $project->technologies()->detach();
 ```
+
+CREARE IL RESOURCE CONTROLLER PER AGGIUNGERE NUOVE TECHNOLOGIES
+```bash
+php artisan make:controller --resource Admin/TechnologyController --resource --model=Technology
+```
+
+CREARE LE FORM REQUESTS PER IL MODELLO ***Technology*** IN MODO DA IMPLEMENTARE LE CRUDS
+```bash
+php artisan make:request StoreTechnologyRequest
+```
+
+```bash
+php artisan make:request UpdateTechnologyRequest
+```
+
+ EDITARE ***StoreTechnologyRequest*** E ***UpdateTechnologyRequest***
+```php
+public function rules(): array
+    {
+        return [
+            // IL NOME E' RICHIESTO, HA UNA LUNGHEZZA 3/50 E DEVE ESSERE UNICO ALL'INTERNO DEL CAMPO name NELLA TABELLA technologies
+            'name' => 'required|bail|min:3|max:50|unique:technologies,name' 
+        ];
+    }
+```
