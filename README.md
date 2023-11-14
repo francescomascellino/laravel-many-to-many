@@ -315,3 +315,13 @@ public function rules(): array
         ];
     }
 ```
+
+AGGIUNGERE AL MODELLO ***Technology*** I CAMPI $fillable ED EVENTUALMENTE IL METODO PER GENERARE LO SLUG
+```php
+protected $fillable = ['name', 'slug'];
+
+    public static function generateSlug($name)
+    {
+        return Str::slug($name, '-');
+    }
+```
