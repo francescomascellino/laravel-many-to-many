@@ -32,7 +32,7 @@
                                 <p><strong>Description: </strong>{{ $project->description }}</p>
 
                                 <p><strong>Type:
-                                    </strong>{{ $project->type->name ? $project->type->name : 'Uncategorized' }}</p>
+                                    </strong>{{ isset($project->type->name) ? $project->type->name : 'Uncategorized' }}</p>
 
                                 <p><strong>Technologies used: </strong>{{ $project->tech }}</p>
 

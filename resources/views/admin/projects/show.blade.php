@@ -29,7 +29,7 @@
 
                     <div class="card-body">
                         <p><strong>Description: </strong>{{ $project->description }}</p>
-                        <p><strong>Type: </strong>{{ $project->type->name ? $project->type->name : 'Uncategorized' }}</p>
+                        <p><strong>Type: </strong>{{ isset($project->type->name) ? $project->type->name : 'Uncategorized' }}</p>
 
                         <p><strong>Technologies used:</strong></p>
 
