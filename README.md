@@ -325,3 +325,10 @@ protected $fillable = ['name', 'slug'];
         return Str::slug($name, '-');
     }
 ```
+AGGIUNGERE LE ROUTES IN ***web.php*** ALL'INTERNO DEL ROUTES GROUP DELL'ADMIN
+```php
+// TECHNOLOGIES RESOURCE CONTROLLER ROUTES
+        Route::resource('technologies', TechnologyController::class)->parameters(['technologies' => 'technology:slug']);
+```
+
+INSERIRE LE CRUDS E LE VISTE NECESSARIE

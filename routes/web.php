@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\TechnologyController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Project;
@@ -47,14 +48,10 @@ Route::middleware('auth', 'verified') // PER GLI UTENTI LOGGATI & VERIFICATI
 
         // TYPES RESOURCE CONTROLLER ROUTES
         Route::resource('types', TypeController::class)->parameters(['types' => 'type:slug']);
+
+        // TECHNOLOGIES RESOURCE CONTROLLER ROUTES
+        Route::resource('technologies', TechnologyController::class)->parameters(['technologies' => 'technology:slug']);
     });
-
-// FARE DOMANDE SU QUESTO
-// Route::get('projects/recycle', [ProjectController::class, 'recycle'])->name("project.recycle");
-
-/* Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard'); */
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
