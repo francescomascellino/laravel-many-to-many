@@ -107,3 +107,10 @@ public function run(): void
 
     }
 ```
+
+CREARE LA MIGRAZIONE PER LA TABELLA PIVOT
+❗ATTENZIONE USARE L'oORDINE ALFABETICO NELLE TABELLE DA COLLEGARE❗
+```bash
+php artisan make:migration create_project_technology_table
+```
+
