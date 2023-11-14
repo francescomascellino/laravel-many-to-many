@@ -76,3 +76,34 @@ CREARE MODELLO, MIGRATION E SEEDER
 ```bash
 php artisan make:model Technology -ms // migration seeder
 ```
+
+EDITARE LA MIGRATION DELLA NUOVA TABELLA technologies
+```php
+public function up(): void
+    {
+        Schema::create('technologies', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('name', 50)->unique;
+            $table->string('slug', 50);
+
+            $table->timestamps();
+        });
+    }
+```
+
+EDITARE IL SEEDER DELLA NUOVA TABELLA INSERENDO LE PRIME TECNOLOGIE
+```php
+public function run(): void
+    {
+        $technologies = ['CSS', 'Html', 'Javascript', 'Bootstrap', 'Vue.js', 'Vite', 'Php', 'MySQL', 'Laravel'];
+
+        foreach ($technologies as $technology) {
+            $newTechnology = new Technology();
+            $newTechnology->name = $technology;
+            $newTechnology->slug = Str::slug($newTechnology->name);
+            $newTechnology->save();
+        }
+
+    }
+```
