@@ -77,7 +77,7 @@ CREARE MODELLO, MIGRATION E SEEDER
 php artisan make:model Technology -ms // migration seeder
 ```
 
-EDITARE LA MIGRATION DELLA NUOVA TABELLA technologies
+EDITARE LA MIGRATION DELLA NUOVA TABELLA ***technologies***
 ```php
 public function up(): void
     {
@@ -109,8 +109,30 @@ public function run(): void
 ```
 
 CREARE LA MIGRAZIONE PER LA TABELLA PIVOT
-❗ATTENZIONE USARE L'oORDINE ALFABETICO NELLE TABELLE DA COLLEGARE❗
+❗**ATTENZIONE USARE L'ORDINE ALFABETICO NELLE TABELLE DA COLLEGARE**❗
 ```bash
 php artisan make:migration create_project_technology_table
+```
+
+EDITARE LA MIGRATION DELLA NUOVA TABELLA ***project_technology***
+```php
+public function up(): void
+    {
+        Schema::create('project_technology', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreign('project_id')
+                ->references('id')
+                ->on('projects');
+
+            $table->foreign('technology_id')
+                ->references('id')
+                ->on('technologies');
+
+            $table->primary(['project_id', 'technology_id']); // IMPEDISCE CHE SI POSSA ASSOCIARE DUE VOLTE LO STESSO PROGETTO E LA STESSA TECH (QUINDI EVITANDO PROGETTI CON DUE TECH UGUALI)
+
+            $table->timestamps();
+        });
+    }
 ```
 
