@@ -92,11 +92,6 @@
 
         </div>
 
-        {{-- PAGINATION --}}
-        <div class="my-3">
-            {{-- {{ $types->links('pagination::bootstrap-5') }} --}}
-        </div>
-
-        {{-- <h1>ADMIN/TYPES/INDEX.BLADE</h1> --}}
+        {{-- <h1>ADMIN/TECHNOLOGIES/INDEX.BLADE</h1> --}}
     </div>
 @endsection
