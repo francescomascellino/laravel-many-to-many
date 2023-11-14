@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('thumb')->nullable();
             $table->text('description')->nullable();
-            $table->string('tech')->nullable();
+            // $table->string('tech')->nullable();
             $table->string('github', 2048)->nullable();
             $table->string('link', 2048)->nullable();
 

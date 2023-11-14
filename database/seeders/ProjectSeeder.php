@@ -27,7 +27,7 @@ class ProjectSeeder extends Seeder
             // $project->thumb = 'thumbs/' . $faker->image('public/storage/thumbs', category: 'Projects', fullPath: 'false');
             $project->thumb = $faker->imageUrl(category: 'Projects');
             $project->description = $faker->realText();
-            $project->tech = $faker->company();
+            // $project->tech = $faker->company();
             $project->github = $faker->url();
             $project->link = $faker->url();
 

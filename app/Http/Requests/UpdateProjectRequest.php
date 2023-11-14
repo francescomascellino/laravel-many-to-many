@@ -29,7 +29,7 @@ class UpdateProjectRequest extends FormRequest
             'title' => ['required', 'bail', 'min:3', 'max:200', Rule::unique('projects')->ignore($this->project)],
             'thumb' => 'nullable|image|max:300',
             'description' => 'nullable|bail|min:3|max:500',
-            'tech' => 'nullable|bail|min:3|max:200',
+            // 'tech' => 'nullable|bail|min:3|max:200',
             'github' => 'nullable|bail|min:3|max:2048',
             'link' => 'nullable|bail|min:3|max:2048',
         ];

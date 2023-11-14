@@ -16,7 +16,7 @@ class Project extends Model
 
     use SoftDeletes;
 
-    protected $fillable = ['type_id', 'title', 'slug', 'thumb', 'description', 'tech', 'github', 'link'];
+    protected $fillable = ['type_id', 'title', 'slug', 'thumb', 'description', 'github', 'link'];
 
     // CHECK IF ALREADY EXISTS WHEN ADDING ENTRIES
     public static function generateSlug($title)

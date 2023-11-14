@@ -27,7 +27,7 @@
                     <div class="card-header"><i class="fa-solid fa-users"></i></i> {{ __('Users') }}</div>
 
                     <div class="card-body">
-                        <p>There are a total Users registered on the platform: <strong>{{ $total_users }}</strong></p>
+                        <p>Total Users registered on the platform: <strong>{{ $total_users }}</strong></p>
                     </div>
                 </div>
             </div>
@@ -40,6 +40,32 @@
 
                     <div class="card-body">
                         <p>There are a total of <strong>{{ $total_projects }}</strong> registered Projects on the platform
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center my-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header"><i class="fa-solid fa-tags"></i> {{ __('Project Types') }}</div>
+
+                    <div class="card-body">
+                        <p>There are a total of <strong>{{ $total_types }}</strong> registered Projects Types registered in the Database
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center my-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header"><i class="fa-solid fa-code"></i> {{ __('Project Technologies') }}</div>
+
+                    <div class="card-body">
+                        <p>There are a total of <strong>{{ $total_technologies }}</strong> registered Projects Technologies registered in the Database
                         </p>
                     </div>
                 </div>
