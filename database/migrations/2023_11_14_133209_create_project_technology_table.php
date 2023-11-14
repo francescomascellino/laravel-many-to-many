@@ -12,17 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('project_technology', function (Blueprint $table) {
-            $table->id();
+            // $table->id();
 
+            $table->primary(['project_id', 'technology_id']); // IMPEDISCE CHE SI POSSA ASSOCIARE DUE VOLTE LO STESSO PROGETTO E LA STESSA TECH (QUINDI EVITANDO PROGETTI CON DUE TECH UGUALI)
+
+            $table->unsignedBigInteger('project_id');
             $table->foreign('project_id')
                 ->references('id')
                 ->on('projects');
 
+            $table->unsignedBigInteger('technology_id');
             $table->foreign('technology_id')
                 ->references('id')
                 ->on('technologies');
-
-            $table->primary(['project_id', 'technology_id']); // IMPEDISCE CHE SI POSSA ASSOCIARE DUE VOLTE LO STESSO PROGETTO E LA STESSA TECH (QUINDI EVITANDO PROGETTI CON DUE TECH UGUALI)
 
             $table->timestamps();
         });

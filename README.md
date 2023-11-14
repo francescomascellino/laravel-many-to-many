@@ -108,6 +108,11 @@ public function run(): void
     }
 ```
 
+ESEGUIRE LA MIGRAZIONE
+```bash
+php artisan db:seed --class=TechnologySeeder
+```
+
 CREARE LA MIGRAZIONE PER LA TABELLA PIVOT
 ❗**ATTENZIONE USARE L'ORDINE ALFABETICO NELLE TABELLE DA COLLEGARE**❗
 ```bash
@@ -119,21 +124,24 @@ EDITARE LA MIGRATION DELLA NUOVA TABELLA ***project_technology***
 public function up(): void
     {
         Schema::create('project_technology', function (Blueprint $table) {
-            $table->id();
+            // $table->id();
 
-            $table->foreign('project_id')
+            $table->primary(['project_id', 'technology_id']); // IMPEDISCE CHE SI POSSA ASSOCIARE DUE VOLTE LO STESSO PROGETTO E LA STESSA TECH (QUINDI EVITANDO PROGETTI CON DUE TECH UGUALI)
+
+            $table->unsignedBigInteger('project_id'); // CREA LA COLONNA
+            $table->foreign('project_id') // ASSEGNA LA COLONNA ALL'ID DI projects
                 ->references('id')
                 ->on('projects');
 
-            $table->foreign('technology_id')
+            $table->unsignedBigInteger('technology_id'); // CREA LA COLONNA
+            $table->foreign('technology_id') // ASSEGNA LA COLONNA ALL'ID DI technologies
                 ->references('id')
                 ->on('technologies');
-
-            $table->primary(['project_id', 'technology_id']); // IMPEDISCE CHE SI POSSA ASSOCIARE DUE VOLTE LO STESSO PROGETTO E LA STESSA TECH (QUINDI EVITANDO PROGETTI CON DUE TECH UGUALI)
 
             $table->timestamps();
         });
     }
+
 ```
 
 AGGIUNGERE LE RELAZIONI NEL MODELLO ***Project***
@@ -149,4 +157,10 @@ public function project(): BelongsToMany
     {
         return $this->belongsToMany(Project::class);
     }
+```
+
+ESEGUIRE LA MIGRATION
+
+```bash
+php artisan migrate
 ```
