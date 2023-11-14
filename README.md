@@ -277,8 +277,16 @@ MODIFICARE LA VISTA ***admin.projects.create*** E AGGIUNGERE IL FORM PER SELEZIO
 ```
 
 MODIFICARE IL METODO ***update()*** in ***ProjectController*** E AGGIUNGERE UN COLTROLLO SULLA PRESENZA DI ***technologies*** nella ***UpdateProjectRequest***
+USARE IL METODO ***synch()*** per AGGIORNARE IN MASSA LE RELAZIONI
+https://laravel.com/docs/10.x/eloquent-relationships#syncing-associations
 ```php
 if ($request->has('technologies')) {
     $project->technologies()->sync($request->technologies); // (o valData['technologies'])
 }
+```
+
+MODIFICARE IL METODO ***destroy()*** (O ***forcedelete()***) in ***ProjectController*** CON IL METODO detach() PER RIMUOVERE LE RELAZIONII NELLA PIVOT PRIMA DELL'ELIMINAZIONE
+https://laravel.com/docs/10.x/eloquent-relationships#attaching-detaching
+```php
+$project->technologies()->detach();
 ```

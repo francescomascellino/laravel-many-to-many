@@ -19,7 +19,6 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        // $projects = Project::all();
 
         $page_title = 'Projects';
 
@@ -161,10 +160,7 @@ class ProjectController extends Controller
             Storage::delete($project->thumb);
         }
 
-        /* if ($project->thumb != null && $project->thumb != '') {
-            // dd($project->thumb);
-            Storage::delete($project->thumb);
-        } */
+        $project->technologies()->detach();
 
         $project->forceDelete();
 
