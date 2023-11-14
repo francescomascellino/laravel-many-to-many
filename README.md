@@ -136,3 +136,17 @@ public function up(): void
     }
 ```
 
+AGGIUNGERE LE RELAZIONI NEL MODELLO ***Project***
+```php
+public function technologies(): BelongsToMany
+    {
+        return $this->belongsToMany(Technology::class);
+    }
+```
+AGGIUNGERE LE RELAZIONI NEL MODELLO ***Technology***
+```php
+public function project(): BelongsToMany
+    {
+        return $this->belongsToMany(Project::class);
+    }
+```
