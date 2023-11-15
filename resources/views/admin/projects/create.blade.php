@@ -21,9 +21,10 @@
 
                         <label for="title" class="form-label"><strong>* Title</strong></label>
 
-                        <input type="text" class="form-control @error('title') is-invalid"  @enderror name="title"
+                        <input type="text" class="form-control @error('title') is-invalid @enderror" name="title"
                             id="title" aria-describedby="helpTitle" placeholder="New Project Title"
                             value="{{ old('title') }}">
+
                         <div id="helpTitle" class="form-text">
                             Your title must be 3-200 characters long.
                         </div>
@@ -56,7 +57,7 @@
                     <div class="mb-3">
                         <label for="type_id" class="form-label"><strong>Type</strong></label>
                         <select class="form-select form-select @error('type_id') is-invalid @enderror" name="type_id"
-                            id="type_id">
+                            aria-describedby="helpType_id" id="type_id">
                             <option selected disabled>Select a Type</option>
                             <option value="">Uncategorized</option>
                             @foreach ($types as $type)
@@ -66,6 +67,10 @@
                                 </option>
                             @endforeach
                         </select>
+
+                        <div id="helpType_id" class="form-text">
+                            Select a Type for your Project.
+                        </div>
 
                         @error('type_id')
                             <div class="text-danger">{{ $message }}</div>
@@ -119,8 +124,10 @@
                                 <div class="form-check mx-1">
 
                                     {{-- VIENE DATO UN ARRAY COME NAME PER ACCETTARE SCELTE MULTIPLE --}}
-                                    <input class="form-check-input" type="checkbox" id="technologies" name="technologies[]"
-                                        value="{{ $technology->id }}" {{-- CONFRONTA L'ARRAY DEGLI ID DELLE TECHNOLOGIES CON QUELLO CONTENENTE I CAMPI SELEZIONATI PRECEDENTEMENTE
+                                    <input class="form-check-input @error('technologies') is-invalid @enderror"
+                                        type="checkbox" id="technologies" name="technologies[]"
+                                        aria-describedby="helpTechnology" value="{{ $technology->id }}"
+                                        {{-- CONFRONTA L'ARRAY DEGLI ID DELLE TECHNOLOGIES CON QUELLO CONTENENTE I CAMPI SELEZIONATI PRECEDENTEMENTE
                                     SE VI SONO CORRISPONDENZE LI PRESELEZIONA
                                     SE L'ARRAY OLD NON ESISTE CONFRONTA UN ARRAY VUOTO [] COME FALLBACK, AUTOMATICAMENTE NON TROVANDO CORRISPONDENZE E NON SELEZIONANDO NULLA --}}
                                         {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}>
@@ -129,6 +136,10 @@
 
                                 </div>
                             @endforeach
+                        </div>
+
+                        <div id="helpTechnology" class="form-text">
+                            Check the Technologies used in your Project.
                         </div>
 
                         @error('technologies')
@@ -143,12 +154,18 @@
                         <label for="github" class="form-label"><strong>GitHub Link</strong></label>
 
                         <input type="text" class="form-control @error('github') is-invalid @enderror" name="github"
-                            id="github" placeholder="Enter your GitHub Project Repository Link"
-                            value="{{ old('github') }}">
+                            id="github" aria-describedby="helpGithub"
+                            placeholder="Enter your GitHub Project Repository Link" value="{{ old('github') }}">
+
+                        <div id="helpGithub" class="form-text">
+                            Enter the GitHub repository page link.
+                        </div>
 
                         @error('github')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
+
+
 
                     </div>
 
@@ -158,7 +175,12 @@
                         <label for="link" class="form-label"><strong>Project Link</strong></label>
 
                         <input type="text" class="form-control @error('link') is-invalid @enderror" name="link"
-                            id="link" placeholder="Enter your Project Link" value="{{ old('link') }}">
+                            id="link" aria-describedby="helpLink" placeholder="Enter your Project Link"
+                            value="{{ old('link') }}">
+
+                        <div id="helpLink" class="form-text">
+                            Enter the website link for your Project.
+                        </div>
 
                         @error('link')
                             <div class="text-danger">{{ $message }}</div>
@@ -173,6 +195,7 @@
 
                         <input type="file" class="form-control @error('thumb') is-invalid @enderror" name="thumb"
                             id="thumb" placeholder="Upload a new image file..." aria-describedby="helpThumb">
+
                         <div id="helpThumb" class="form-text">
                             Choose a valid image file with a max size of 500kb
                         </div>
@@ -185,7 +208,8 @@
 
                     <button type="submit" class="btn btn-success my-3"><i class="fa-solid fa-floppy-disk"></i>
                         Save</button>
-                    <a class="btn btn-primary" href="{{ route('admin.projects.index') }}"><i class="fa-solid fa-ban"></i>
+                    <a class="btn btn-primary" href="{{ route('admin.projects.index') }}"><i
+                            class="fa-solid fa-ban"></i>
                         Cancel</a>
 
                 </form>
