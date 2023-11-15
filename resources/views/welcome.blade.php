@@ -20,11 +20,18 @@
                             </div>
 
                             @if (str_contains($project->thumb, 'http'))
-                                <img class="img-fluid object-fit-cover" src="{{ $project->thumb }}" style="height: 300px"
+                                <img class="img-fluid object-fit-cover" style="height: 300px" src="{{ $project->thumb }}"
                                     alt="{{ $project->title }}">
-                            @else
+                            @elseif ($project->thumb)
                                 <img class="img-fluid object-fit-cover" style="height: 300px"
                                     src="{{ asset('storage/' . $project->thumb) }}">
+                            @else
+                                <div class="d-flex flex-column justify-content-center bg-body-secondary"
+                                    style="height: 300px">
+                                    <h1 class="text-center"><i class="fa-regular fa-face-grin-beam-sweat"></i></h1>
+                                    <h1 class="text-center">No avaiable preview</h1>
+                                    <h1 class="text-center">for this project</h1>
+                                </div>
                             @endif
 
                             <div class="card-body">
