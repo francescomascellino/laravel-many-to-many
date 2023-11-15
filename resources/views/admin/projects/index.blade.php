@@ -20,7 +20,7 @@
                         <th scope="col">Preview</th>
                         <th scope="col">Title</th>
                         <th scope="col" class="d-none d-sm-none d-md-table-cell">Description</th>
-                        <th scope="col">Technologies used</th>
+                        {{-- <th scope="col">Technologies used</th> --}}
                         <th scope="col">Quick links</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -28,8 +28,11 @@
                 <tbody>
                     @forelse ($projects as $project)
                         <tr class="">
+
+                            {{-- ID CELL --}}
                             <td class="align-middle" scope="row">{{ $project->id }}</td>
 
+                            {{-- THUMB CELL --}}
                             @if (str_contains($project->thumb, 'http'))
                                 <td class="text-center align-middle"><img class="img-fluid img-fluid object-fit-cover"
                                         style="height: 100px" src="{{ $project->thumb }}" alt="{{ $project->title }}"></td>
@@ -40,10 +43,15 @@
                                 <td class="text-center align-middle">N/A</td>
                             @endif
 
+                            {{-- TITLE CELL --}}
                             <td class="align-middle">{{ $project->title }}</td>
+
+                            {{-- DESCRIPTION CELL --}}
                             <td class="align-middle d-none d-sm-none d-md-table-cell">{{ $project->description }}</td>
-                            <td class="align-middle">{{ $project->tech }}
-                            </td>
+
+                            {{-- TECH CELL --}}
+                            {{-- <td class="align-middle">{{ $project->tech }}
+                            </td> --}}
 
                             {{-- QUICK LINKS CELL --}}
                             <td class="align-middle text-center" text-center>
@@ -70,19 +78,19 @@
                                 {{-- I PROGETTI SONO COLLEGATI TRAMITE LO SLUG --}}
 
                                 {{-- SHOW PROJECT DETAILS BUTTON --}}
-                                <div class="d-inline-block">
+                                <div class="d-block">
                                     <a href="{{ route('admin.projects.show', $project->slug) }}"
                                         class="btn btn-primary m-1"><i class="fa-solid fa-eye"></i></a>
                                 </div>
 
                                 {{-- EDIT PROJECT BUTTON --}}
-                                <div class="d-inline-block">
+                                <div class="d-block">
                                     <a href="{{ route('admin.projects.edit', $project->slug) }}"
                                         class="btn btn-warning m-1"><i class="fa-solid fa-pen"></i></a>
                                 </div>
 
                                 <!-- SOFT DELETE Modal trigger button -->
-                                <div class="d-inline-block">
+                                <div class="d-block">
                                     <button type="button" class="btn btn-danger m-1" data-bs-toggle="modal"
                                         data-bs-target="#deleteproject{{ $project->id }}">
                                         <i class="fa-regular fa-trash-can"></i>
