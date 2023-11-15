@@ -83,7 +83,7 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        $projects = Project::has('type')->get(); // RECUPERIAMO I PROGETTI CHE HANNO UN TYPE
+        $projects = Project::withTrashed()->has('type')->get(); // RECUPERIAMO I PROGETTI CHE HANNO UN TYPE
 
         // CICLIAMO I PROGETTI
         foreach ($projects as $project) {
@@ -96,7 +96,7 @@ class TypeController extends Controller
             }
         }
 
-        $type->delete();
+        // $type->delete();
         return to_route('admin.types.index')->with('status', 'Well Done, Element deleted Succeffully');
     }
 }

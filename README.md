@@ -337,7 +337,7 @@ INSERIRE LE CRUDS E LE VISTE NECESSARIE
 ```php
 public function destroy(Technology $technology)
     {
-        $projects = Project::all();
+        $projects = Project::withTrashed();
 
         foreach ($projects as $project) {
             if ($project->technologies) {
@@ -358,7 +358,7 @@ TypeController ***destroy()*** METHOD
 ```php
 public function destroy(Type $type)
     {
-        $projects = Project::has('type')->get(); // RECUPERIAMO I PROGETTI CHE HANNO UN TYPE
+        $projects = Project::withTrashed()->has('type')->get(); // RECUPERIAMO I PROGETTI CHE HANNO UN TYPE
 
         // CICLIAMO I PROGETTI
         foreach ($projects as $project) {
