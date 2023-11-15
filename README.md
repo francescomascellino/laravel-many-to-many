@@ -22,7 +22,7 @@ INIZIALIZZARE E COMMITTARE
 ```bash
 git init
 git add .
-git commit -m
+git commit -m "commit message"
 ```
 
 COPIARE I COMANDI DI DA GITHUB PER AGGIUNGERE L'ORIGINE REMOTA E PUSHARE SU MAIN
