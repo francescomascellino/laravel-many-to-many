@@ -35,7 +35,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $page_title = 'Add New';
+        $page_title = 'Add New Technology';
         $types = Type::all();
         $technologies = Technology::all();
         return view('admin.projects.create', compact('page_title', 'types', 'technologies'));
