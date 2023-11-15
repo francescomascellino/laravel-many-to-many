@@ -333,7 +333,7 @@ AGGIUNGERE LE ROUTES IN ***web.php*** ALL'INTERNO DEL ROUTES GROUP DELL'ADMIN
 
 INSERIRE LE CRUDS E LE VISTE NECESSARIE
 
-destroy() DELLE TECHNOLOGIES GIA' ASSOCIATE A UN PROJECT
+***destroy()*** DELLE TECHNOLOGIES GIA' ASSOCIATE A UN PROJECT
 ```php
 public function destroy(Technology $technology)
     {
@@ -347,5 +347,31 @@ public function destroy(Technology $technology)
 
         $technology->delete();
         return to_route('admin.technologies.index')->with('status', 'Well Done, Element deleted Succeffully'); 
+    }
+```
+
+***destroy()*** DI UN TYPE GIA' ASSOCIATO A UN PROJECT
+PER ELIMINARE L'ISTANZA DI UNA CLASSE CHE BelongsTo UN'ALTRA CLASSE BISOGNA PRIMA DISSOCIARLA
+https://laravel.com/docs/10.x/eloquent-relationships#updating-belongs-to-relationships
+
+TypeController ***destroy()*** METHOD
+```php
+public function destroy(Type $type)
+    {
+        $projects = Project::has('type')->get(); // RECUPERIAMO I PROGETTI CHE HANNO UN TYPE
+
+        // CICLIAMO I PROGETTI
+        foreach ($projects as $project) {
+            // QUANDO TROVIAMO UN PROGETTO IL CUI TYPE HA UN ID UGUALE A QUELLO DEL TYPE CHESTIAMO ELIMINANDO
+            if ($project->type->id == $type->id) {
+                // DISSOCIAMO IL TYPE
+                $project->type()->dissociate();
+                // NON DIMENTICHIAMO DI SALVARE
+                $project->save();
+            }
+        }
+
+        $type->delete();
+        return to_route('admin.types.index')->with('status', 'Well Done, Element deleted Succeffully'); 
     }
 ```
