@@ -41,7 +41,7 @@
                         <label for="description" class="form-label "><strong>Description</strong></label>
 
                         <textarea class="form-control @error('description') is-invalid  @enderror" name="description" id="description"
-                            aria-describedby="helpDescription" cols="30" rows="5" placeholder="New Project Description">{{ old('descritpion') }}</textarea>
+                            aria-describedby="helpDescription" cols="30" rows="5" >{{ old('descritpion') }}</textarea>
 
                         <div id="helpDescription" class="form-text">
                             Your description must be 3-500 characters long.

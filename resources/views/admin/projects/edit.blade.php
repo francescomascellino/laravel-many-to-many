@@ -204,7 +204,7 @@
                                 <td><img class=" img-fluid" style="height: 100px"
                                         src="{{ asset('storage/' . $project->thumb) }}"></td>
                             @else
-                            <i class="fa-regular fa-image fa-xl"></i> None Selected
+                                <i class="fa-regular fa-image fa-xl"></i> None Selected
                             @endif
 
                         </div>
