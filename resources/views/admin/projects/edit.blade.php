@@ -83,19 +83,17 @@
                     </div> --}}
 
                     {{-- TECHNOLOGIES FORM --}}
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="technologies" class="form-label"><strong>Technologies Used</strong></label>
                         <select multiple class="form-select form-select" name="technologies[]" id="technologies">
                             <option disabled>Select Technologies used</option>
                             @foreach ($technologies as $technology)
                                 @if ($errors->any())
-                                    <option value="{{ $technology->id }}" {{-- SE VI SONO ERRORI CONTROLLA SE L'ID DELLA TECHNOLOGY CICLATA E' CONTENUTO DENTRO old('technologies')
-                                        SE VI SONO CORRISPONDENZE LE PRESELEZIONA
-                                        SE L'ARRAY OLD NON ESISTE CONFRONTA UN ARRAY VUOTO [] COME FALLBACK, AUTOMATICAMENTE NON TROVANDO CORRISPONDENZE E NON SELEZIONANDO NULLA --}}
+                                    <option value="{{ $technology->id }}"
                                         {{ in_array($technology->id, old('technologies', [])) ? 'selected' : '' }}>
                                         {{ $technology->name }}</option>
                                 @else
-                                    <option value="{{ $technology->id }}" {{-- SE $project->technologies CONTIENE LA TECHNOLOGY CICLATA LA SELEZIONA --}}
+                                    <option value="{{ $technology->id }}"
                                         {{ $project->technologies->contains($technology) ? 'selected' : '' }}>
                                         {{ $technology->name }}</option>
                                 @endif
@@ -104,6 +102,35 @@
                         @error('technologies')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
+                    </div> --}}
+
+                    <div class="my-3">
+                        <label for="technologies" class="form-label d-block"><strong>Technologies Used:</strong></label>
+                        <div class="card p-2 d-flex flex-row">
+                            @foreach ($technologies as $technology)
+                                <div class="form-check mx-1">
+
+                                    {{-- VIENE DATO UN ARRAY COME NAME PER ACCETTARE SCELTE MULTIPLE --}}
+                                    @if ($errors->any())
+                                        <input class="form-check-input" type="checkbox" id="technologies"
+                                            name="technologies[]" value="{{ $technology->id }}" {{-- CONFRONTA L'ARRAY DEGLI ID DELLE TECHNOLOGIES CON QUELLO CONTENENTE I CAMPI SELEZIONATI PRECEDENTEMENTE
+                                    SE VI SONO CORRISPONDENZE LI PRESELEZIONA
+                                    SE L'ARRAY OLD NON ESISTE CONFRONTA UN ARRAY VUOTO [] COME FALLBACK, AUTOMATICAMENTE NON TROVANDO CORRISPONDENZE E NON SELEZIONANDO NULLA --}}
+                                            {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}>
+                                    @else
+                                        <input class="form-check-input" type="checkbox" id="technologies"
+                                            name="technologies[]" value="{{ $technology->id }}" {{-- SE $project->technologies CONTIENE LA TECHNOLOGY CICLATA LA SELEZIONA --}}
+                                            {{ $project->technologies->contains($technology) ? 'checked' : '' }}>
+                                    @endif
+                                    <label class="form-check-label" for="technologies">{{ $technology->name }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        @error('technologies')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+
                     </div>
 
                     {{-- GITHUB LINK FORM --}}
