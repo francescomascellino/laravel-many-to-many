@@ -20,7 +20,7 @@
 
                         <label for="name" class="form-label"><strong>* Name</strong></label>
 
-                        <input type="text" class="form-control @error('name') is-invalid"  @enderror name="name"
+                        <input type="text" class="form-control @error('name') is-invalid  @enderror" name="name"
                             id="name" aria-describedby="HelpName" placeholder="New Type name"
                             value="{{ old('name') }}">
                         <div id="HelpName" class="form-text">
