@@ -54,7 +54,7 @@
 
                     {{-- TYPE FORM --}}
                     <div class="mb-3">
-                        <label for="type_id" class="form-label">Type</label>
+                        <label for="type_id" class="form-label"><strong>Type</strong></label>
                         <select class="form-select form-select @error('type_id') is-invalid @enderror" name="type_id"
                             id="type_id">
                             <option selected disabled>Select a Type</option>
