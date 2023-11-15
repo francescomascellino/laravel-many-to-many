@@ -4,7 +4,7 @@
     <div class="container">
 
         <h2 class="fs-4 text-secondary my-4">
-            {{ __('New Project Page for') }} {{ Auth::user()->name }}.
+            {{ __('New Project Page for') }} {{ Auth::user()->name }}
         </h2>
 
         <div class="row justify-content-center my-3">
