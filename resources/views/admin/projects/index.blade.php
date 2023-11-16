@@ -12,7 +12,7 @@
         <a href="{{ route('admin.projects.create') }}" class="btn btn-primary my-3"><i
                 class="fa-solid fa-file-circle-plus"></i> New Project</a>
 
-        <div class="card py-3">
+        <div class="card py-3 bg-light">
 
             <div class="table-responsive">
                 <table class="table table-light table-striped m-0">

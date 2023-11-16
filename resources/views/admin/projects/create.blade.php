@@ -118,21 +118,21 @@
                     </div> --}}
 
                     <div class="my-3">
-                        <label for="technologies" class="form-label d-block"><strong>Technologies Used:</strong></label>
+                        <label class="form-label d-block"><strong>Technologies Used:</strong></label>
                         <div class="card p-2 d-flex flex-row">
                             @foreach ($technologies as $technology)
                                 <div class="form-check mx-1">
 
                                     {{-- VIENE DATO UN ARRAY COME NAME PER ACCETTARE SCELTE MULTIPLE --}}
                                     <input class="form-check-input @error('technologies') is-invalid @enderror"
-                                        type="checkbox" id="technologies" name="technologies[]"
+                                        type="checkbox" id="technologies{{ $technology->id }}" name="technologies[]"
                                         aria-describedby="helpTechnology" value="{{ $technology->id }}"
                                         {{-- CONFRONTA L'ARRAY DEGLI ID DELLE TECHNOLOGIES CON QUELLO CONTENENTE I CAMPI SELEZIONATI PRECEDENTEMENTE
                                     SE VI SONO CORRISPONDENZE LI PRESELEZIONA
                                     SE L'ARRAY OLD NON ESISTE CONFRONTA UN ARRAY VUOTO [] COME FALLBACK, AUTOMATICAMENTE NON TROVANDO CORRISPONDENZE E NON SELEZIONANDO NULLA --}}
                                         {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="technologies">{{ $technology->name }}</label>
+                                    <label class="form-check-label" for="technologies{{ $technology->id }}">{{ $technology->name }}</label>
 
                                 </div>
                             @endforeach

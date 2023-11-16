@@ -9,7 +9,7 @@
 
         @include('admin.projects.partials.status_alert')
 
-        <div class="card py-3">
+        <div class="card py-3 bg-light">
 
             <div class="table-responsive">
                 <table class="table table-light table-striped m-0">
