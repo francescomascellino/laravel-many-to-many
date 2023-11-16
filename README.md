@@ -396,7 +396,7 @@ public function destroy(Type $type)
                 // SE L'ARRAY OLD NON ESISTE CONFRONTA UN ARRAY VUOTO [] COME FALLBACK, AUTOMATICAMENTE NON TROVANDO CORRISPONDENZE E NON SELEZIONANDO NULLA
                 {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}>
 
-            <label class="form-check-label" for="technologies{{ $technology->id }}">{{ $technology->name }}</label>
+                <label class="form-check-label" for="technologies{{ $technology->id }}">{{ $technology->name }}</label>
 
             </div>
         @endforeach
@@ -440,7 +440,7 @@ public function destroy(Type $type)
                         {{ $project->technologies->contains($technology) ? 'checked' : '' }}>
                 @endif
 
-            <label class="form-check-label" for="technologies{{ $technology->id }}">{{ $technology->name }}</label>
+                <label class="form-check-label" for="technologies{{ $technology->id }}">{{ $technology->name }}</label>
 
             </div>
         @endforeach
