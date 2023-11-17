@@ -454,3 +454,24 @@ public function destroy(Type $type)
     <div class="text-danger">{{ $message }}</div>
 @enderror
 ```
+
+## API
+
+AGGIUNGERE LA ROTTA DELL'API IN ***routes/api.php***
+```php
+// RETURNS JSON
+Route::get('projects', function () {
+    return response()->json([
+        'status' => 'success',
+        'result' => Project::all()
+    ]);
+});
+```
+
+```php
+// RETURNS ARRAY
+Route::get('projects', function () {
+    return Project::all()
+    ]);
+});
+```
