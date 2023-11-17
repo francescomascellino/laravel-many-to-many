@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $projects = Project::orderByDesc('id')->paginate(3);
+    // phpinfo();
     return view('welcome', compact('projects'));
 });
 

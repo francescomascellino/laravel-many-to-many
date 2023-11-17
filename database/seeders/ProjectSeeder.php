@@ -24,8 +24,8 @@ class ProjectSeeder extends Seeder
             $project->type_id = $faker->randomElement($types);
             $project->title = $faker->realText(50);
             $project->slug = Str::slug($project->title, '-');
-            // $project->thumb = 'thumbs/' . $faker->image('public/storage/thumbs', category: 'Projects', fullPath: 'false');
-            $project->thumb = $faker->imageUrl(category: 'Projects');
+            $project->thumb = 'thumbs/' . $faker->image('public/storage/thumbs', 600, 480, 'Project', false);
+            // $project->thumb = $faker->imageUrl(category: 'Projects');
             $project->description = $faker->realText();
             // $project->tech = $faker->company();
             $project->github = $faker->url();

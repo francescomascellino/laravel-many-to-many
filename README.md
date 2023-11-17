@@ -457,6 +457,14 @@ public function destroy(Type $type)
 
 ## API
 
+```php
+// RETURNS ARRAY
+Route::get('projects', function () {
+    return Project::all()
+    ]);
+});
+```
+
 AGGIUNGERE LA ROTTA DELL'API IN ***routes/api.php***
 ```php
 // RETURNS JSON
@@ -467,11 +475,55 @@ Route::get('projects', function () {
     ]);
 });
 ```
-
+***paginate()*** (VUOTO = 15)
 ```php
-// RETURNS ARRAY
+// RETURNS JSON
 Route::get('projects', function () {
-    return Project::all()
+    return response()->json([
+        'status' => 'success',
+        // PAGINAZIONE
+        'result' => Project::paginate(5)
     ]);
 });
+```
+ADD EAGER LOADING PER VISUALIZZARE LE RELATIONS
+```php
+// RETURNS JSON
+Route::get('projects', function () {
+    $projects = Project::with('type', 'technologies')->paginate(5);
+    return response()->json([
+        'status' => 'success',
+        'result' => $projects
+    ]);
+});
+```
+
+ORDINE DISCENDENTE
+```php
+Route::get('projects', function () {
+    $projects = Project::with('type', 'technologies')->OrderbyDesc('id')->paginate(5);
+    return response()->json([
+        'status' => 'success',
+        'result' => $projects
+    ]);
+});
+```
+
+## CORS CROSS ORIGIN RESOURCE SHARIG
+
+IN ***config/cors.php***
+FA SI CHE TUTTE LE ORIGINI POSSANO CONSUMARE I DATI
+```php
+'allowed_origins' => ['*'],
+```
+
+POSSIAMO INSERIRE DIRETTAMENTE NELL'ARRAY L'URL O AGGIUNGERE NEL FILE ***.env*** UNA VARIABLE:
+```bash
+APP_FRONTEND_URL=http://localhost:5174
+```
+
+E INSERIRLA NEL VALORE DELLA CHIAVE:
+
+```php
+'allowed_origins' => ['APP_FRONTEND_URL', 'http://localhost:5174'], // IL SECONDO E' UN VALORE DI DEFAULT
 ```
